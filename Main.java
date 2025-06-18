@@ -22,21 +22,29 @@ public class Main {
 		CardTester.main(null);
 
 		/*** DRIVER PROGRAM ***/
-		//1. Generate 52 card deck into Card array
+		// suits as defined in Card class
 		char[] suits = { Card.HEART, Card.DIAMOND, Card.CLUB, Card.SPADE };
 
+		// create new array to hold 52 cards
+		Card[] deck = new Card[52];
+		int index = 0;
 
+		// loop through each suit and value to fill deck
 		for (char suit : suits) {
 			for (int value = 1; value <= 13; value++) {
-				Card card = new Card(value, suit);
-				System.out.print(card.getPrintValue() + " " + card.getSuit() + " ");
+				deck[index++] = new Card(value, suit);
 			}
-			System.out.println("");
-		//used to move to next line after each suit
 		}
 
-		//2. Print deck
-
-
+		//2. Print deck, while matching all the same suits on the same lines 
+		for (char suit : suits) {
+			StringBuilder line = new StringBuilder();
+			for (Card card : deck) {
+				if (card.getSuit() == suit) {
+					line.append(card.getPrintValue()).append(" ").append(suit).append(" ");
+				}
+			}
+		System.out.println(line);
+		}
 	}
 }
