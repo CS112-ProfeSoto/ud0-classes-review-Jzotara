@@ -13,7 +13,7 @@
  * - Whenever value/suit is changed, it must be within the valid values
  *
  * @author Jon Zotara
- * @version 0.1
+ * @version 0.2
  */
 
 /*
@@ -83,8 +83,11 @@ public class Card {
 	 *              spade, or club)
 	 */
 	public Card(int value, char suit) {
-		this.value = value;
-		this.suit = suit;
+		boolean setSuccessful = this.setAll(value, suit);
+		if (!setSuccessful) {
+			System.out.println("ERROR"); // added termination line 
+			System.exit(0);
+		}
 	}
 
 
@@ -270,7 +273,7 @@ public class Card {
 	 * @return String containing (print) value and suit, separated by a space
 	 */
 	public String toString() {
-		return this.value + " " + this.suit;
+		return getPrintValue() + " " + suit; // corrected line to ensure code prints proper card value
 	}
 
 
